@@ -28,11 +28,16 @@ def Home(request):
     movies = Movie.objects.all()
 
     for movie in movies:
-        try:
-            review = Review.objects.get(movie=movie)
-            movie.rating = review.rating
-        except Review.DoesNotExist:
-            movie.rating = None
+        reviews = Review.objects.filter(movie=movie)
+
+        if reviews.exists():
+            total_rating = sum(review.rating for review in reviews)
+            average_rating = total_rating / len(reviews)
+            movie.rating = round(average_rating, 1)
+        else:
+            average_rating = None
+
+        movie.rating = average_rating
 
     paginator=Paginator(movies,4)
     page_number= request.GET.get('page')
@@ -43,8 +48,12 @@ def Home(request):
     except EmptyPage:
         page=paginator.page(page_number.num_pages)
 
-
-    return render(request, 'user/home.html', {'movies': movies, 'user_name': user_name,'page':page})
+    context = {
+        'movies': page,
+        'user_name': user_name,
+        'page': page,
+    }
+    return render(request, 'user/home.html', context)
 
 
 def CreateMovie(request):
@@ -108,7 +117,7 @@ def RateMovie(request, movie_id):
         form = ReviewForm(instance=review)
     context = {'form': form,
                'movie':movie,
-               'review': review}
+               'review': review,}
     return render(request, 'user/rate.html', context)
 
 
