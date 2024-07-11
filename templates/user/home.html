@@ -21,7 +21,7 @@
                         <ul>
                             <li><i class="fa fa-star"></i>
                                 {% if movie.rating %}
-                                    {{ movie.rating }}
+                                    {{ movie.rating|floatformat:"1" }}
                                 {% else %}
                                     5.0
                                 {% endif %}
