@@ -1,0 +1,39 @@
+{% block rate %}
+<div class="game-details">
+    <div class="row mt-2">
+        <div class="content">
+            <div class="col-lg">
+                <div class="review-form">
+
+                    <form method="POST" action="{% url 'rate' movie.id %}">
+                        {% csrf_token %}
+
+                        <div class="form-row" style="border:none; width:100%;">
+                            <div class="">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="number" name="rating" placeholder="Rate Movie" step="0.1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row" style="border:none;">
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="textarea--style-6" name="comment" placeholder="Write your comments here..." style="padding: 22px 15px 0px 45px;">{{ review.comment }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="main-border-button">
+                                <button type="submit">Done</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

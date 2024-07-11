@@ -1,0 +1,89 @@
+{% extends 'mainAdmin/admin-base.html' %}
+{% load static %}
+
+{% block user %}
+
+<!-- ***** Movie Library Start ***** -->
+<div class="gaming-library">
+    <div class="col-lg-12">
+        <div class="heading-section ms-5">
+            <h4><em> User</em> Library</h4>
+        </div>
+{% if page %}
+        {% for user in page %}
+        <div class="item">
+            <ul>
+                <li class="ps-5" style="width: 182px;"><h4>Username</h4>
+                    <h6><i class="fa fa-check"></i> {{ user.username }}</h6></li>
+
+                <li class="ps-5 ms-2"><h4>Email</h4><span>{{ user.email }}</span></li>
+                <li class="ps-5"><h4>First Name</h4><span>{{ user.firstname }}</span></li>
+                <li><h4>Last Name</h4><span>{{ user.lastname }}</span></li>
+                <li>
+                    <div class="main-border-button border-active"><a href="{% url 'admin-delete-user' user.id %}">Delete</a></div>
+                </li>
+            </ul>
+        </div>
+        {% endfor %}
+         {% else %}
+                <p>No users found</p>
+{% endif %}
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+
+                    {% if page.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page.previous_page_number }}&q={{ query }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page.paginator.page_range %}
+
+                    <li class="page-item {% if page.number == num %} activate {% endif %}">
+                        <a class="page-link" href="?page={{num}}&q={{ query }}">{{ num }}</a></li>
+
+                    {% endfor %}
+
+                    {% if page.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page.next_page_number }}&q={{ query }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                    {% endif %}
+
+                  </ul>
+                </nav>
+
+    </div>
+    <div class="gaming-library">
+        <div class="col-lg-12">
+            <div class="heading-section">
+                <h4><em>Movie</em> Library</h4>
+            </div>
+
+            {% for movie in movies %}
+            <div class="item">
+                <ul>
+                    <li><img src="{{ movie.poster.url }}" alt="" class="templatemo-item"></li>
+                    <li><h4>{{ movie.title }}</h4><span>{{ movie.release_year }}</span></li>
+                    <li><h4>Genre</h4><span>{{ movie.genres }}</span></li>
+                    <li><h4>Added by</h4><span>{{ movie.added_by }}</span></li>
+                    <li>
+                        <div class="main-border-button border-active"><a
+                                href="{% url 'admin-delete' movie.id %}">Delete</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Movie App</title>
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+<div class="page-wrapper bg-dark p-t-100 p-b-50">
+    <div class="wrapper wrapper--w900">
+        <div class="card card-6">
+            <div class="card-heading">
+                <h2 class="title">Add Genre</h2>
+            </div>
+            <div class="card-body">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="name">Genre</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="name" placeholder="Movie Genre">
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit">Add Genres</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery JS-->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+
+
+<!-- Main JS-->
+<script src="{% static 'assets/js/global.js' %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

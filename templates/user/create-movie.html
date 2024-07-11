@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    	<title>MovieBox App</title>
+
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" media="all">
+
+</head>
+
+<body>
+<div class="page-wrapper bg-dark p-t-100 p-b-50">
+    <div class="wrapper wrapper--w900">
+        <div class="card card-6">
+            <div class="card-heading">
+                <h2 class="title">Add Movie</h2>
+
+            </div>
+            <div class="card-body">
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="name">Title</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="title" placeholder="Movie title">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Release Year</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-6" type="text" name="release_year"
+                                       placeholder="Release year">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Description</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <textarea class="textarea--style-6" name="description"
+                                          placeholder="Movie Description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name"> Poster</div>
+                        <div class="value">
+                            <div class="input-group js-input-file">
+                                <input class="input-file" type="file" name="poster" id="file">
+                                <label class="label--file" for="file">Choose file</label>
+                                <span class="input-file__info">No file chosen</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Actors</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-6" type="text" name="actors" placeholder="Actors">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Genre</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <select class="input--style-6 custom-dropdown" name="genres">
+                                    <option value="" disabled selected>Choose</option>
+                                    {% for genre in genres %}
+                                        <option value="{{ genre.id }}">{{ genre.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Trailer link</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-6" type="url" name="trailer_link" placeholder="Paste trailer URL">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-footer">
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit">Add Movie</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery JS-->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+
+
+<!-- Main JS-->
+<script src="{% static 'assets/js/global.js' %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

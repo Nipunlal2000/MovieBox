@@ -1,0 +1,71 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="most-popular">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="heading-section">
+                <h4><em>Most Popular</em> Right Now</h4>
+            </div>
+
+            <div class="row">
+            {% for movie in movies %}
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                        <img src="{{ movie.poster.url }}" alt="">
+                        <h4>{{ movie.title }}<br><span>{{ movie.release_year }}</span></h4>
+                        <ul>
+                            <li><i class="fa fa-star"></i> 4.8</li>
+                            <li><i class="fa fa-play"></i><a href="{{ movie.trailer_link }}">Trailer</a> </li>
+                        </ul>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+       </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Most Popular End ***** -->
+
+<!-- ***** Movie Library Start ***** -->
+<div class="gaming-library">
+    <div class="col-lg-12">
+        <div class="heading-section">
+            <h4><em>Your Movie</em> Library</h4>
+        </div>
+
+    {% for movie in movies %}
+        <div class="item">
+            <ul>
+                <li><img src="{{ movie.poster.url }}" alt="" class="templatemo-item"></li>
+                <li><h4>{{ movie.title }}</h4><span>{{ movie.release_year }}</span></li>
+                <li><h4>Genre</h4><span>{{ movie.genres }}</span></li>
+                <li>
+                    <div class="main-border-button border-active ms-2"><a href="{% url 'update' movie.id %}">Update</a></div>
+                </li>
+                <li>
+                    <div class="main-border-button border-active ms-5"><a href="{% url 'details' movie.id %}">Details</a></div>
+                </li>
+                <li>
+                    <div class="main-border-button border-active"><a href="{% url 'delete' movie.id %}">Delete</a></div>
+                </li>
+            </ul>
+        </div>
+    {% endfor %}
+
+    </div>
+    <div class="col-lg-12">
+        <div class="main-button">
+            <a href="profile.html">View Your Library</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
